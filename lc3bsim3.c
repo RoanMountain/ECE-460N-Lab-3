@@ -53,7 +53,7 @@ void latch_datapath_values();
 /***************************************************************/
 /* Definition of bit order in control store word.              */
 /***************************************************************/
-enum CS_BITS {                                                  
+enum CS_BITS {
     IRD,
     COND1, COND0,
     J5, J4, J3, J2, J1, J0,
@@ -112,7 +112,7 @@ int GetMARMUX(int *x)        { return(x[MARMUX]); }
 int GetALUK(int *x)          { return((x[ALUK1] << 1) + x[ALUK0]); }
 int GetMIO_EN(int *x)        { return(x[MIO_EN]); }
 int GetR_W(int *x)           { return(x[R_W]); }
-int GetDATA_SIZE(int *x)     { return(x[DATA_SIZE]); } 
+int GetDATA_SIZE(int *x)     { return(x[DATA_SIZE]); }
 int GetLSHF1(int *x)         { return(x[LSHF1]); }
 
 /***************************************************************/
@@ -124,12 +124,12 @@ int CONTROL_STORE[CONTROL_STORE_ROWS][CONTROL_STORE_BITS];
 /* Main memory.                                                */
 /***************************************************************/
 /* MEMORY[A][0] stores the least significant byte of word at word address A
-   MEMORY[A][1] stores the most significant byte of word at word address A 
-   There are two write enable signals, one for each byte. WE0 is used for 
-   the least significant byte of a word. WE1 is used for the most significant 
+   MEMORY[A][1] stores the most significant byte of word at word address A
+   There are two write enable signals, one for each byte. WE0 is used for
+   the least significant byte of a word. WE1 is used for the most significant
    byte of a word. */
 
-#define WORDS_IN_MEM    0x08000 
+#define WORDS_IN_MEM    0x08000
 #define MEM_CYCLES      5
 int MEMORY[WORDS_IN_MEM][2];
 
@@ -157,14 +157,14 @@ int PC,		/* program counter */
     BEN;        /* ben register */
 
 int READY;	/* ready bit */
-  /* The ready bit is also latched as you dont want the memory system to assert it 
+  /* The ready bit is also latched as you dont want the memory system to assert it
      at a bad point in the cycle*/
 
 int REGS[LC_3b_REGS]; /* register file. */
 
 int MICROINSTRUCTION[CONTROL_STORE_BITS]; /* The microintruction */
 
-int STATE_NUMBER; /* Current State Number - Provided for debugging */ 
+int STATE_NUMBER; /* Current State Number - Provided for debugging */
 } System_Latches;
 
 /* Data Structure for Latch */
@@ -183,7 +183,7 @@ int CYCLE_COUNT;
 /* Purpose   : Print out a list of commands.                   */
 /*                                                             */
 /***************************************************************/
-void help() {                                                    
+void help() {
     printf("----------------LC-3bSIM Help-------------------------\n");
     printf("go               -  run program to completion       \n");
     printf("run n            -  execute program for n cycles    \n");
@@ -200,9 +200,9 @@ void help() {
 /* Purpose   : Execute a cycle                                 */
 /*                                                             */
 /***************************************************************/
-void cycle() {                                                
+void cycle() {
 
-  eval_micro_sequencer();   
+  eval_micro_sequencer();
   cycle_memory();
   eval_bus_drivers();
   drive_bus();
@@ -220,7 +220,7 @@ void cycle() {
 /* Purpose   : Simulate the LC-3b for n cycles.                 */
 /*                                                             */
 /***************************************************************/
-void run(int num_cycles) {                                      
+void run(int num_cycles) {
     int i;
 
     if (RUN_BIT == FALSE) {
@@ -246,7 +246,7 @@ void run(int num_cycles) {
 /* Purpose   : Simulate the LC-3b until HALTed.                 */
 /*                                                             */
 /***************************************************************/
-void go() {                                                     
+void go() {
     if (RUN_BIT == FALSE) {
 	printf("Can't simulate, Simulator is halted\n\n");
 	return;
@@ -259,7 +259,7 @@ void go() {
     printf("Simulator halted\n\n");
 }
 
-/***************************************************************/ 
+/***************************************************************/
 /*                                                             */
 /* Procedure : mdump                                           */
 /*                                                             */
@@ -267,7 +267,7 @@ void go() {
 /*             output file.                                    */
 /*                                                             */
 /***************************************************************/
-void mdump(FILE * dumpsim_file, int start, int stop) {          
+void mdump(FILE * dumpsim_file, int start, int stop) {
     int address; /* this is a byte address */
 
     printf("\nMemory content [0x%.4x..0x%.4x] :\n", start, stop);
@@ -289,12 +289,12 @@ void mdump(FILE * dumpsim_file, int start, int stop) {
 /*                                                             */
 /* Procedure : rdump                                           */
 /*                                                             */
-/* Purpose   : Dump current register and bus values to the     */   
+/* Purpose   : Dump current register and bus values to the     */
 /*             output file.                                    */
 /*                                                             */
 /***************************************************************/
-void rdump(FILE * dumpsim_file) {                               
-    int k; 
+void rdump(FILE * dumpsim_file) {
+    int k;
 
     printf("\nCurrent register/bus values :\n");
     printf("-------------------------------------\n");
@@ -333,10 +333,10 @@ void rdump(FILE * dumpsim_file) {
 /*                                                             */
 /* Procedure : get_command                                     */
 /*                                                             */
-/* Purpose   : Read a command from standard input.             */  
+/* Purpose   : Read a command from standard input.             */
 /*                                                             */
 /***************************************************************/
-void get_command(FILE * dumpsim_file) {                         
+void get_command(FILE * dumpsim_file) {
     char buffer[20];
     int start, stop, cycles;
 
@@ -385,10 +385,10 @@ void get_command(FILE * dumpsim_file) {
 /*                                                             */
 /* Procedure : init_control_store                              */
 /*                                                             */
-/* Purpose   : Load microprogram into control store ROM        */ 
+/* Purpose   : Load microprogram into control store ROM        */
 /*                                                             */
 /***************************************************************/
-void init_control_store(char *ucode_filename) {                 
+void init_control_store(char *ucode_filename) {
     FILE *ucode;
     int i, j, index;
     char line[200];
@@ -445,7 +445,7 @@ void init_control_store(char *ucode_filename) {
 /* Purpose   : Zero out the memory array                    */
 /*                                                          */
 /************************************************************/
-void init_memory() {                                           
+void init_memory() {
     int i;
 
     for (i=0; i < WORDS_IN_MEM; i++) {
@@ -461,7 +461,7 @@ void init_memory() {
 /* Purpose   : Load program and service routines into mem.    */
 /*                                                            */
 /**************************************************************/
-void load_program(char *program_filename) {                   
+void load_program(char *program_filename) {
     FILE * prog;
     int ii, word, program_base;
 
@@ -504,11 +504,11 @@ void load_program(char *program_filename) {
 /*                                                             */
 /* Procedure : initialize                                      */
 /*                                                             */
-/* Purpose   : Load microprogram and machine language program  */ 
+/* Purpose   : Load microprogram and machine language program  */
 /*             and set up initial state of the machine.        */
 /*                                                             */
 /***************************************************************/
-void initialize(char *ucode_filename, char *files[], int num_prog_files) { 
+void initialize(char *ucode_filename, char *files[], int num_prog_files) {
     int i;
     init_control_store(ucode_filename);
 
@@ -530,7 +530,7 @@ void initialize(char *ucode_filename, char *files[], int num_prog_files) {
 /* Procedure : main                                            */
 /*                                                             */
 /***************************************************************/
-int main(int argc, char *argv[]) {                              
+int main(int argc, char *argv[]) {
     FILE * dumpsim_file;
 
     /* Error Checking */
@@ -574,61 +574,239 @@ int main(int argc, char *argv[]) {
 /***************************************************************/
 
 
+/***************************************************************/
+/* Helper functions and signals shared between the routines.   */
+/***************************************************************/
+
+/* Sign-extend the low 'bits' bits of x to a full int. */
+int sext(int x, int bits) {
+  int mask = 1 << (bits - 1);
+  x &= (1 << bits) - 1;
+  return (x ^ mask) - mask;
+}
+
+/* Memory model state. */
+int MEM_CYCLE_COUNT = 0;   /* cycles the current memory access has taken */
+int MEM_OUT = 0;           /* word read from memory this cycle (valid when R) */
+
+/* Values at the inputs of the five tristate drivers. */
+int MARMUX_OUT, PC_OUT, ALU_OUT, SHF_OUT, MDR_OUT;
+
+/* Output of the address adder (feeds MARMUX and PCMUX). */
+int ADDER_OUT;
+
+/* SR1 out: register selected by SR1MUX. */
+int get_sr1(int *mi) {
+  int ir = CURRENT_LATCHES.IR;
+  int sr1 = GetSR1MUX(mi) ? ((ir >> 6) & 0x7) : ((ir >> 9) & 0x7);
+  return CURRENT_LATCHES.REGS[sr1];
+}
+
+
 void eval_micro_sequencer() {
 
-  /* 
-   * Evaluate the address of the next state according to the 
+  /*
+   * Evaluate the address of the next state according to the
    * micro sequencer logic. Latch the next microinstruction.
    */
+  int *mi = CURRENT_LATCHES.MICROINSTRUCTION;
+  int ir = CURRENT_LATCHES.IR;
+  int next_state;
 
+  if (GetIRD(mi)) {
+    /* Decode: 0,0,IR[15:12] */
+    next_state = (ir >> 12) & 0xF;
+  } else {
+    int cond = GetCOND(mi);
+    int j = GetJ(mi);
+    int branch = (cond == 2) && CURRENT_LATCHES.BEN;      /* J[2] */
+    int ready  = (cond == 1) && CURRENT_LATCHES.READY;    /* J[1] */
+    int amode  = (cond == 3) && ((ir >> 11) & 0x1);       /* J[0] */
+    next_state = j | (branch << 2) | (ready << 1) | amode;
+  }
+
+  NEXT_LATCHES.STATE_NUMBER = next_state;
+  memcpy(NEXT_LATCHES.MICROINSTRUCTION, CONTROL_STORE[next_state],
+         sizeof(int) * CONTROL_STORE_BITS);
 }
 
 
 void cycle_memory() {
- 
-  /* 
-   * This function emulates memory and the WE logic. 
-   * Keep track of which cycle of MEMEN we are dealing with.  
-   * If fourth, we need to latch Ready bit at the end of 
-   * cycle to prepare microsequencer for the fifth cycle.  
-   */
 
+  /*
+   * This function emulates memory and the WE logic.
+   * Keep track of which cycle of MEMEN we are dealing with.
+   * If fourth, we need to latch Ready bit at the end of
+   * cycle to prepare microsequencer for the fifth cycle.
+   */
+  int *mi = CURRENT_LATCHES.MICROINSTRUCTION;
+  int addr = CURRENT_LATCHES.MAR >> 1;   /* word address */
+  int mar0 = CURRENT_LATCHES.MAR & 0x1;
+
+  if (!GetMIO_EN(mi)) {
+    MEM_CYCLE_COUNT = 0;
+    NEXT_LATCHES.READY = 0;
+    return;
+  }
+
+  if (CURRENT_LATCHES.READY) {
+    /* Fifth cycle: the access completes this cycle. */
+    if (GetR_W(mi)) {
+      /* Write: WE logic based on DATA.SIZE and MAR[0]. */
+      int mdr = CURRENT_LATCHES.MDR;
+      if (GetDATA_SIZE(mi)) {
+        MEMORY[addr][0] = mdr & 0xFF;             /* WE0 */
+        MEMORY[addr][1] = (mdr >> 8) & 0xFF;      /* WE1 */
+      } else if (mar0) {
+        MEMORY[addr][1] = (mdr >> 8) & 0xFF;      /* WE1 */
+      } else {
+        MEMORY[addr][0] = mdr & 0xFF;             /* WE0 */
+      }
+    } else {
+      /* Read: always a full word from M[MAR[15:1]'0]. */
+      MEM_OUT = Low16bits((MEMORY[addr][1] << 8) | MEMORY[addr][0]);
+    }
+    MEM_CYCLE_COUNT = 0;
+    NEXT_LATCHES.READY = 0;
+  } else {
+    MEM_CYCLE_COUNT++;
+    /* Ready is asserted at the end of the fourth cycle. */
+    NEXT_LATCHES.READY = (MEM_CYCLE_COUNT == MEM_CYCLES - 1);
+  }
 }
 
 
 
 void eval_bus_drivers() {
 
-  /* 
+  /*
    * Datapath routine emulating operations before driving the bus.
-   * Evaluate the input of tristate drivers 
+   * Evaluate the input of tristate drivers
    *             Gate_MARMUX,
    *		 Gate_PC,
    *		 Gate_ALU,
    *		 Gate_SHF,
    *		 Gate_MDR.
-   */    
+   */
+  int *mi = CURRENT_LATCHES.MICROINSTRUCTION;
+  int ir = CURRENT_LATCHES.IR;
+  int sr1 = get_sr1(mi);
+  int addr1, addr2, op2, amt;
 
+  /* Address adder: ADDR1MUX + (optionally shifted) ADDR2MUX. */
+  addr1 = GetADDR1MUX(mi) ? sr1 : CURRENT_LATCHES.PC;
+  switch (GetADDR2MUX(mi)) {
+    case 0:  addr2 = 0;                    break;
+    case 1:  addr2 = sext(ir, 6);          break;
+    case 2:  addr2 = sext(ir, 9);          break;
+    default: addr2 = sext(ir, 11);         break;
+  }
+  if (GetLSHF1(mi)) addr2 <<= 1;
+  ADDER_OUT = Low16bits(addr1 + addr2);
+
+  /* MARMUX: LSHF(ZEXT[IR[7:0]],1) or adder output. */
+  MARMUX_OUT = GetMARMUX(mi) ? ADDER_OUT : Low16bits((ir & 0xFF) << 1);
+
+  /* PC */
+  PC_OUT = CURRENT_LATCHES.PC;
+
+  /* ALU: A = SR1, B = SR2MUX (IR[5] selects imm5 or SR2). */
+  op2 = ((ir >> 5) & 0x1) ? sext(ir, 5) : CURRENT_LATCHES.REGS[ir & 0x7];
+  switch (GetALUK(mi)) {
+    case 0:  ALU_OUT = Low16bits(sr1 + op2); break;
+    case 1:  ALU_OUT = Low16bits(sr1 & op2); break;
+    case 2:  ALU_OUT = Low16bits(sr1 ^ op2); break;
+    default: ALU_OUT = Low16bits(sr1);       break;
+  }
+
+  /* SHF: IR[5:4] selects LSHF / RSHFL / RSHFA, IR[3:0] is amount. */
+  amt = ir & 0xF;
+  switch ((ir >> 4) & 0x3) {
+    case 0:  SHF_OUT = Low16bits(sr1 << amt);            break;
+    case 1:  SHF_OUT = Low16bits(sr1 >> amt);            break;
+    default: SHF_OUT = Low16bits(sext(sr1, 16) >> amt);  break;
+  }
+
+  /* MDR: whole word, or sign-extended byte selected by MAR[0]. */
+  if (GetDATA_SIZE(mi)) {
+    MDR_OUT = CURRENT_LATCHES.MDR;
+  } else if (CURRENT_LATCHES.MAR & 0x1) {
+    MDR_OUT = Low16bits(sext(CURRENT_LATCHES.MDR >> 8, 8));
+  } else {
+    MDR_OUT = Low16bits(sext(CURRENT_LATCHES.MDR, 8));
+  }
 }
 
 
 void drive_bus() {
 
-  /* 
-   * Datapath routine for driving the bus from one of the 5 possible 
-   * tristate drivers. 
-   */       
+  /*
+   * Datapath routine for driving the bus from one of the 5 possible
+   * tristate drivers.
+   */
+  int *mi = CURRENT_LATCHES.MICROINSTRUCTION;
 
+  if (GetGATE_MARMUX(mi))   BUS = MARMUX_OUT;
+  else if (GetGATE_PC(mi))  BUS = PC_OUT;
+  else if (GetGATE_ALU(mi)) BUS = ALU_OUT;
+  else if (GetGATE_SHF(mi)) BUS = SHF_OUT;
+  else if (GetGATE_MDR(mi)) BUS = MDR_OUT;
+  else                      BUS = 0;   /* nothing driving the bus */
 }
 
 
 void latch_datapath_values() {
 
-  /* 
+  /*
    * Datapath routine for computing all functions that need to latch
    * values in the data path at the end of this cycle.  Some values
-   * require sourcing the bus; therefore, this routine has to come 
+   * require sourcing the bus; therefore, this routine has to come
    * after drive_bus.
-   */       
+   */
+  int *mi = CURRENT_LATCHES.MICROINSTRUCTION;
+  int ir = CURRENT_LATCHES.IR;
 
+  if (GetLD_MAR(mi))
+    NEXT_LATCHES.MAR = Low16bits(BUS);
+
+  if (GetLD_MDR(mi)) {
+    if (GetMIO_EN(mi)) {
+      /* Only take memory data once the access has completed. */
+      if (CURRENT_LATCHES.READY)
+        NEXT_LATCHES.MDR = MEM_OUT;
+    } else if (GetDATA_SIZE(mi)) {
+      NEXT_LATCHES.MDR = Low16bits(BUS);
+    } else {
+      /* Byte store: replicate BUS[7:0] into both halves. */
+      NEXT_LATCHES.MDR = ((BUS & 0xFF) << 8) | (BUS & 0xFF);
+    }
+  }
+
+  if (GetLD_IR(mi))
+    NEXT_LATCHES.IR = Low16bits(BUS);
+
+  if (GetLD_BEN(mi))
+    NEXT_LATCHES.BEN = (((ir >> 11) & 1) && CURRENT_LATCHES.N) ||
+                       (((ir >> 10) & 1) && CURRENT_LATCHES.Z) ||
+                       (((ir >> 9)  & 1) && CURRENT_LATCHES.P);
+
+  if (GetLD_REG(mi)) {
+    int dr = GetDRMUX(mi) ? 7 : ((ir >> 9) & 0x7);
+    NEXT_LATCHES.REGS[dr] = Low16bits(BUS);
+  }
+
+  if (GetLD_CC(mi)) {
+    int val = Low16bits(BUS);
+    NEXT_LATCHES.N = (val & 0x8000) ? 1 : 0;
+    NEXT_LATCHES.Z = (val == 0) ? 1 : 0;
+    NEXT_LATCHES.P = (val != 0 && !(val & 0x8000)) ? 1 : 0;
+  }
+
+  if (GetLD_PC(mi)) {
+    switch (GetPCMUX(mi)) {
+      case 0:  NEXT_LATCHES.PC = Low16bits(CURRENT_LATCHES.PC + 2); break;
+      case 1:  NEXT_LATCHES.PC = Low16bits(BUS);                    break;
+      default: NEXT_LATCHES.PC = ADDER_OUT;                         break;
+    }
+  }
 }
