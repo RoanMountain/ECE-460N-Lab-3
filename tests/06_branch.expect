@@ -1,0 +1,14 @@
+# Expected dumpsim lines for 06_branch (checked in order).
+Cycle Count  : 332
+PC           : 0x0000
+IR           : 0xf025
+CCs: N = 0  Z = 1  P = 0
+Registers:
+0: 0x0000
+1: 0x0002
+2: 0x0007
+3: 0x000f
+4: 0x0000
+5: 0x0000
+6: 0x0000
+7: 0x303c

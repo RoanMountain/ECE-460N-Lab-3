@@ -1,0 +1,14 @@
+# Expected dumpsim lines for 08_lea_cc (checked in order).
+Cycle Count  : 71
+PC           : 0x0000
+IR           : 0xf025
+CCs: N = 1  Z = 0  P = 0
+Registers:
+0: 0x0000
+1: 0x3000
+2: 0xffff
+3: 0x3012
+4: 0x0000
+5: 0x0000
+6: 0x0000
+7: 0x3012

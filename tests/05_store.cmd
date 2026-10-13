@@ -1,0 +1,4 @@
+go
+rdump
+mdump 0x301a 0x3024
+quit

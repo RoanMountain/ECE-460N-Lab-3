@@ -1,0 +1,19 @@
+run 1
+rdump
+run 1
+rdump
+run 1
+rdump
+run 1
+rdump
+run 1
+rdump
+run 1
+rdump
+run 1
+rdump
+run 1
+rdump
+run 1
+rdump
+quit

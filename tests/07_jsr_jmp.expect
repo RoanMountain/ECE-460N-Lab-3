@@ -1,0 +1,14 @@
+# Expected dumpsim lines for 07_jsr_jmp (checked in order).
+Cycle Count  : 191
+PC           : 0x0000
+IR           : 0xf025
+CCs: N = 0  Z = 0  P = 1
+Registers:
+0: 0x3012
+1: 0x0009
+2: 0x0002
+3: 0x0003
+4: 0x3018
+5: 0x300c
+6: 0x0000
+7: 0x301a

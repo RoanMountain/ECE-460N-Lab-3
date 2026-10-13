@@ -1,0 +1,14 @@
+# Expected dumpsim lines for 03_shift (checked in order).
+Cycle Count  : 102
+PC           : 0x0000
+IR           : 0xf025
+CCs: N = 1  Z = 0  P = 0
+Registers:
+0: 0x0042
+1: 0x8421
+2: 0x4210
+3: 0x8000
+4: 0x0842
+5: 0xf842
+6: 0xffff
+7: 0x3014

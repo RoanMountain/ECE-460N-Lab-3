@@ -1,0 +1,4 @@
+go
+rdump
+mdump 0x301c 0x301e
+quit

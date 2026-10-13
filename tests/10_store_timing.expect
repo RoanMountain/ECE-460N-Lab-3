@@ -1,0 +1,27 @@
+# Expected dumpsim lines for 10_store_timing (checked in order).
+# After cycle 28: state 23 just put R1 on the bus and loaded MDR; next state is 16.
+Cycle Count  : 28
+PC           : 0x3006
+IR           : 0x7200
+STATE_NUMBER : 0x0010
+BUS          : 0xffff
+MDR          : 0xffff
+MAR          : 0x3008
+# After cycle 32: four cycles of state 16 done, memory not written yet.
+Cycle Count  : 32
+STATE_NUMBER : 0x0010
+BUS          : 0x0000
+0x3008 (12296) : 0x0000
+# After cycle 33: the 5th cycle wrote memory and moved on to state 18.
+Cycle Count  : 33
+STATE_NUMBER : 0x0012
+0x3008 (12296) : 0xffff
+# After HALT.
+Cycle Count  : 48
+PC           : 0x0000
+CCs: N = 1  Z = 0  P = 0
+Registers:
+0: 0x3008
+1: 0xffff
+2: 0x0000
+7: 0x3008

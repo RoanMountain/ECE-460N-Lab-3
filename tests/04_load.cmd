@@ -1,0 +1,4 @@
+go
+rdump
+mdump 0x3014 0x3018
+quit

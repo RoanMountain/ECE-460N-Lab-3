@@ -1,0 +1,17 @@
+# Expected dumpsim lines for 04_load (checked in order).
+Cycle Count  : 138
+PC           : 0x0000
+IR           : 0xf025
+CCs: N = 0  Z = 0  P = 1
+Registers:
+0: 0x1234
+1: 0x1234
+2: 0x80ff
+3: 0x0034
+4: 0x0012
+5: 0xffff
+6: 0xff80
+7: 0x3014
+0x3014 (12308) : 0x1234
+0x3016 (12310) : 0x80ff
+0x3018 (12312) : 0x0000
